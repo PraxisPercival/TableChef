@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Home - TableChef{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 text-center mb-4">
+        <h1 class="display-4">Welcome to TableChef</h1>
+        <p class="lead">Your personal recipe assistant for scaling and converting recipes</p>
+    </div>
+</div>
+
+<div class="row">
+    {% for recipe in recipes %}
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 recipe-card">
+            <div class="card-body">
+                <h5 class="card-title">{{ recipe.name }}</h5>
+                <p class="card-text">
+                    <strong>Servings:</strong> {{ recipe.servings }}<br>
+                    {% if recipe.baking_temperature %}
+                    <strong>Baking Temperature:</strong> {{ recipe.baking_temperature }}°{{ recipe.temperature_unit }}
+                    {% endif %}
+                </p>
+                
+                <div class="mb-3">
+                    <label for="servings-{{ recipe.id }}" class="form-label">Scale to:</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="servings-{{ recipe.id }}" 
+                               value="{{ recipe.servings }}" min="1">
+                        <button class="btn btn-outline-primary" onclick="scaleRecipe({{ recipe.id }})">
+                            Scale
+                        </button>
+                    </div>
+                </div>
+
+                {% if recipe.baking_temperature %}
+                <div class="mb-3">
+                    <label class="form-label">Convert Temperature:</label>
+                    <div class="btn-group w-100">
+                        <button class="btn btn-outline-secondary" onclick="convertTemp({{ recipe.id }}, 'F')">
+                            To °F
+                        </button>
+                        <button class="btn btn-outline-secondary" onclick="convertTemp({{ recipe.id }}, 'C')">
+                            To °C
+                        </button>
+                    </div>
+                </div>
+                {% endif %}
+
+                <a href="/recipe/{{ recipe.id }}" class="btn btn-primary w-100">View Full Recipe</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function scaleRecipe(recipeId) {
+    const servings = document.getElementById(`servings-${recipeId}`).value;
+    window.location.href = `/recipe/${recipeId}/scale?servings=${servings}`;
+}
+
+function convertTemp(recipeId, toUnit) {
+    window.location.href = `/recipe/${recipeId}/convert-temp?to=${toUnit}`;
+}
+</script>
+{% endblock %} 

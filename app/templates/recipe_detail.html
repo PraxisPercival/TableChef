@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}{{ recipe.name }} - TableChef{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title">{{ recipe.name }}</h1>
+                
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <h3>Ingredients</h3>
+                        <ul class="ingredient-list">
+                            {% for ingredient in recipe.ingredients %}
+                            <li class="ingredient-item">
+                                {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h3>Instructions</h3>
+                        <ol>
+                            {% for instruction in recipe.instructions %}
+                            <li>{{ instruction }}</li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </div>
+
+                {% if recipe.baking_temperature %}
+                <div class="mt-4">
+                    <h3>Baking Temperature</h3>
+                    <p>
+                        {{ recipe.baking_temperature }}°{{ recipe.temperature_unit }}
+                        <button class="btn btn-sm btn-outline-secondary ms-2" onclick="convertTemp({{ recipe.id }}, 'F')">
+                            Convert to °F
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary" onclick="convertTemp({{ recipe.id }}, 'C')">
+                            Convert to °C
+                        </button>
+                    </p>
+                </div>
+                {% endif %}
+
+                <div class="mt-4">
+                    <h3>Scale Recipe</h3>
+                    <div class="input-group" style="max-width: 300px;">
+                        <input type="number" class="form-control" id="servings" 
+                               value="{{ recipe.servings }}" min="1">
+                        <button class="btn btn-outline-primary" onclick="scaleRecipe({{ recipe.id }})">
+                            Scale
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function scaleRecipe(recipeId) {
+    const servings = document.getElementById('servings').value;
+    window.location.href = `/recipe/${recipeId}/scale?servings=${servings}`;
+}
+
+function convertTemp(recipeId, toUnit) {
+    window.location.href = `/recipe/${recipeId}/convert-temp?to=${toUnit}`;
+}
+</script>
+{% endblock %} 

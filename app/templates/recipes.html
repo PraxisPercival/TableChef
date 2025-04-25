@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Recipes - TableChef{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">All Recipes</h1>
+
+<div class="row" id="recipes-container">
+    {% for recipe in recipes %}
+    <div class="col-md-6">
+        <div class="card recipe-card">
+            <div class="card-body">
+                <h5 class="card-title">{{ recipe.name }}</h5>
+                <p class="card-text">Servings: {{ recipe.servings }}</p>
+                
+                <div class="mb-3">
+                    <label for="servings-{{ recipe.id }}" class="form-label">Scale to:</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="servings-{{ recipe.id }}" 
+                               value="{{ recipe.servings }}" min="1">
+                        <button class="btn btn-outline-primary" onclick="scaleRecipe({{ recipe.id }})">
+                            Scale
+                        </button>
+                    </div>
+                </div>
+
+                {% if recipe.baking_temperature %}
+                <div class="mb-3">
+                    <label class="form-label">Temperature:</label>
+                    <div class="btn-group">
+                        <button class="btn btn-outline-secondary" onclick="convertTemp({{ recipe.id }}, 'F')">
+                            {{ recipe.baking_temperature }}°{{ recipe.temperature_unit }} to °F
+                        </button>
+                        <button class="btn btn-outline-secondary" onclick="convertTemp({{ recipe.id }}, 'C')">
+                            {{ recipe.baking_temperature }}°{{ recipe.temperature_unit }} to °C
+                        </button>
+                    </div>
+                </div>
+                {% endif %}
+
+                <a href="/recipe/{{ recipe.id }}" class="btn btn-primary">View Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function scaleRecipe(recipeId) {
+    const servings = document.getElementById(`servings-${recipeId}`).value;
+    window.location.href = `/recipe/${recipeId}/scale?servings=${servings}`;
+}
+
+function convertTemp(recipeId, toUnit) {
+    window.location.href = `/recipe/${recipeId}/convert-temp?to=${toUnit}`;
+}
+</script>
+{% endblock %} 

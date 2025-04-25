@@ -1,0 +1,142 @@
+{
+    "recipes": [
+        {
+            "id": 1,
+            "name": "Chocolate Chip Cookies",
+            "servings": 24,
+            "ingredients": [
+                {"name": "all-purpose flour", "amount": 2.25, "unit": "cups"},
+                {"name": "baking soda", "amount": 1, "unit": "teaspoon"},
+                {"name": "salt", "amount": 1, "unit": "teaspoon"},
+                {"name": "butter", "amount": 1, "unit": "cup"},
+                {"name": "brown sugar", "amount": 0.75, "unit": "cup"},
+                {"name": "white sugar", "amount": 0.75, "unit": "cup"},
+                {"name": "vanilla extract", "amount": 1, "unit": "teaspoon"},
+                {"name": "eggs", "amount": 2, "unit": "large"},
+                {"name": "chocolate chips", "amount": 2, "unit": "cups"}
+            ],
+            "instructions": [
+                "Preheat oven to 375°F (190°C)",
+                "Mix dry ingredients",
+                "Cream butter and sugars",
+                "Add eggs and vanilla",
+                "Combine wet and dry ingredients",
+                "Fold in chocolate chips",
+                "Bake for 9-11 minutes"
+            ],
+            "baking_temperature": 375,
+            "temperature_unit": "F"
+        },
+        {
+            "id": 2,
+            "name": "Spaghetti Bolognese",
+            "servings": 4,
+            "ingredients": [
+                {"name": "ground beef", "amount": 1, "unit": "pound"},
+                {"name": "onion", "amount": 1, "unit": "medium"},
+                {"name": "garlic", "amount": 2, "unit": "cloves"},
+                {"name": "tomato paste", "amount": 2, "unit": "tablespoons"},
+                {"name": "crushed tomatoes", "amount": 28, "unit": "ounces"},
+                {"name": "spaghetti", "amount": 1, "unit": "pound"},
+                {"name": "olive oil", "amount": 2, "unit": "tablespoons"},
+                {"name": "salt", "amount": 1, "unit": "teaspoon"},
+                {"name": "black pepper", "amount": 0.5, "unit": "teaspoon"}
+            ],
+            "instructions": [
+                "Cook pasta according to package instructions",
+                "Sauté onions and garlic in olive oil",
+                "Brown ground beef",
+                "Add tomato paste and crushed tomatoes",
+                "Simmer for 20 minutes",
+                "Season with salt and pepper",
+                "Serve over cooked pasta"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Vegetable Stir Fry",
+            "servings": 4,
+            "ingredients": [
+                {"name": "broccoli florets", "amount": 2, "unit": "cups"},
+                {"name": "carrots", "amount": 2, "unit": "medium"},
+                {"name": "bell peppers", "amount": 2, "unit": "medium"},
+                {"name": "snow peas", "amount": 1, "unit": "cup"},
+                {"name": "garlic", "amount": 3, "unit": "cloves"},
+                {"name": "ginger", "amount": 1, "unit": "tablespoon"},
+                {"name": "soy sauce", "amount": 3, "unit": "tablespoons"},
+                {"name": "sesame oil", "amount": 1, "unit": "tablespoon"},
+                {"name": "vegetable oil", "amount": 2, "unit": "tablespoons"},
+                {"name": "cornstarch", "amount": 1, "unit": "teaspoon"}
+            ],
+            "instructions": [
+                "Cut vegetables into bite-sized pieces",
+                "Mix soy sauce, sesame oil, and cornstarch in a small bowl",
+                "Heat vegetable oil in a wok or large pan",
+                "Add garlic and ginger, stir for 30 seconds",
+                "Add vegetables, starting with the ones that take longer to cook",
+                "Stir fry for 5-7 minutes until vegetables are crisp-tender",
+                "Add sauce mixture and stir until thickened",
+                "Serve over rice"
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Classic Beef Stew",
+            "servings": 6,
+            "ingredients": [
+                {"name": "beef chuck", "amount": 2, "unit": "pounds"},
+                {"name": "potatoes", "amount": 4, "unit": "medium"},
+                {"name": "carrots", "amount": 4, "unit": "medium"},
+                {"name": "onion", "amount": 1, "unit": "large"},
+                {"name": "beef broth", "amount": 4, "unit": "cups"},
+                {"name": "tomato paste", "amount": 2, "unit": "tablespoons"},
+                {"name": "red wine", "amount": 1, "unit": "cup"},
+                {"name": "flour", "amount": 0.25, "unit": "cup"},
+                {"name": "thyme", "amount": 1, "unit": "teaspoon"},
+                {"name": "bay leaves", "amount": 2, "unit": "leaves"},
+                {"name": "salt", "amount": 1, "unit": "teaspoon"},
+                {"name": "black pepper", "amount": 0.5, "unit": "teaspoon"}
+            ],
+            "instructions": [
+                "Cut beef into 1-inch cubes and coat with flour",
+                "Brown beef in batches in a large pot",
+                "Add chopped onions and cook until soft",
+                "Add red wine and scrape up browned bits",
+                "Add beef broth, tomato paste, and seasonings",
+                "Simmer for 1.5 hours",
+                "Add chopped potatoes and carrots",
+                "Continue simmering for 30-45 minutes until vegetables are tender",
+                "Adjust seasoning and serve"
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Lemon Blueberry Muffins",
+            "servings": 12,
+            "ingredients": [
+                {"name": "all-purpose flour", "amount": 2, "unit": "cups"},
+                {"name": "sugar", "amount": 0.75, "unit": "cup"},
+                {"name": "baking powder", "amount": 2, "unit": "teaspoons"},
+                {"name": "salt", "amount": 0.5, "unit": "teaspoon"},
+                {"name": "butter", "amount": 0.5, "unit": "cup"},
+                {"name": "milk", "amount": 0.75, "unit": "cup"},
+                {"name": "eggs", "amount": 2, "unit": "large"},
+                {"name": "lemon zest", "amount": 1, "unit": "tablespoon"},
+                {"name": "lemon juice", "amount": 2, "unit": "tablespoons"},
+                {"name": "blueberries", "amount": 1.5, "unit": "cups"}
+            ],
+            "instructions": [
+                "Preheat oven to 375°F (190°C)",
+                "Mix dry ingredients in a large bowl",
+                "Melt butter and combine with milk, eggs, lemon zest, and juice",
+                "Add wet ingredients to dry ingredients, mix until just combined",
+                "Fold in blueberries",
+                "Fill muffin cups 2/3 full",
+                "Bake for 20-25 minutes until golden brown",
+                "Cool in pan for 5 minutes, then transfer to wire rack"
+            ],
+            "baking_temperature": 375,
+            "temperature_unit": "F"
+        }
+    ]
+} 
