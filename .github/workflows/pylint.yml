@@ -20,3 +20,6 @@ jobs:
     - name: Analysing the code with linter
       run: |
         python .github/workflows/linter.py
+    - name: Verifying linting results
+      run: |
+        cat ../../app/api/routes.py
