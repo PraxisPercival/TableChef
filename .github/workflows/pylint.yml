@@ -22,4 +22,4 @@ jobs:
         python .github/workflows/linter.py
     - name: Verifying linting results
       run: |
-        ls
+        cat app/api/routes.py
