@@ -1,6 +1,8 @@
 from flask import Flask, render_template
+import UnitConversion.unit_converter
 from app.api.routes import api
 import os
+import UnitConversion
 
 def create_app():
     app = Flask(__name__,
@@ -59,7 +61,7 @@ def create_app():
     @app.route('/recipe/<int:recipe_id>/convert-temp')
     def convert_temp(recipe_id):
         try:
-            from app.api.routes import load_recipes, convert_temperature
+            from app.api.routes import load_recipes
             recipes_data = load_recipes()
             recipe = next((r for r in recipes_data['recipes'] if r['id'] == recipe_id), None)
             if not recipe:
@@ -73,13 +75,17 @@ def create_app():
             if 'baking_temperature' not in recipe or 'temperature_unit' not in recipe:
                 return "Recipe does not have temperature information", 400
             
-            converted_temp = convert_temperature(
-                recipe['baking_temperature'],
-                recipe['temperature_unit'],
-                to_unit
+            current_temp = recipe['baking_temperature']
+            current_unit = recipe['temperature_unit']
+            
+            # Convert using the library's convert_temperature function
+            converted_temp = UnitConversion.unit_converter.convert_temperature(
+                current_temp,
+                UnitConversion.unit_converter.CELSIUS if current_unit.upper() == 'C' else UnitConversion.unit_converter.FAHRENHEIT,
+                UnitConversion.unit_converter.CELSIUS if to_unit == 'C' else UnitConversion.unit_converter.FAHRENHEIT
             )
             
-            recipe['baking_temperature'] = converted_temp
+            recipe['baking_temperature'] = round(float(converted_temp))
             recipe['temperature_unit'] = to_unit
             return render_template('recipe_detail.html', recipe=recipe)
         except Exception as e:

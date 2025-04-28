@@ -1,8 +1,7 @@
 from flask import Blueprint, jsonify, request
 import json
 import os
-
-api = Blueprint('api', __name__)
+import UnitConversion
 
 def load_recipes():
     file_path = os.path.join(os.path.dirname(__file__), 'recipes.txt')
@@ -13,15 +12,6 @@ def save_recipes(recipes):
     file_path = os.path.join(os.path.dirname(__file__), 'recipes.txt')
     with open(file_path, 'w') as file:
         json.dump(recipes, file, indent=4)
-
-def convert_temperature(temp, from_unit, to_unit):
-    if from_unit == to_unit:
-        return temp
-    if from_unit == 'F' and to_unit == 'C':
-        return round((temp - 32) * 5/9, 1)
-    if from_unit == 'C' and to_unit == 'F':
-        return round((temp * 9/5) + 32, 1)
-    return temp
 
 def scale_recipe(recipe, new_servings):
     scale_factor = new_servings / recipe['servings']
@@ -36,6 +26,8 @@ def scale_recipe(recipe, new_servings):
         for ing in recipe['ingredients']
     ]
     return scaled_recipe
+
+api = Blueprint('api', __name__)
 
 @api.route('/recipes', methods=['GET'])
 def get_recipes():
@@ -78,15 +70,26 @@ def convert_temperature_endpoint(recipe_id):
     if 'baking_temperature' not in recipe or 'temperature_unit' not in recipe:
         return jsonify({'error': 'Recipe does not have temperature information'}), 400
     
-    converted_temp = convert_temperature(
-        recipe['baking_temperature'],
-        recipe['temperature_unit'],
-        to_unit
-    )
+    current_temp = recipe['baking_temperature']
+    current_unit = recipe['temperature_unit']
+    
+    try:
+        converted_temp = UnitConversion.unit_converter.convert_temperature(
+            current_temp,
+            UnitConversion.unit_converter.CELSIUS if current_unit.upper() == 'C' else UnitConversion.unit_converter.FAHRENHEIT,
+            UnitConversion.unit_converter.CELSIUS if to_unit == 'C' else UnitConversion.unit_converter.FAHRENHEIT
+        )
+    except ValueError as e:
+        return jsonify({'error': str(e)}), 400
+    
+    recipe['baking_temperature'] = float(converted_temp)
+    recipe['temperature_unit'] = to_unit
+    save_recipes(recipes)
     
     return jsonify({
-        'original_temperature': recipe['baking_temperature'],
-        'original_unit': recipe['temperature_unit'],
-        'converted_temperature': converted_temp,
+        'recipe_id': recipe_id,
+        'original_temperature': current_temp,
+        'original_unit': current_unit,
+        'converted_temperature': float(converted_temp),
         'converted_unit': to_unit
-    }) 
+    })
