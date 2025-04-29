@@ -31,4 +31,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Verifying linting results
         run: |
-          cat app/api/routes.py
+          ls
