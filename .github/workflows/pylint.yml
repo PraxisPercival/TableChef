@@ -22,8 +22,8 @@ jobs:
           python .github/workflows/linter.py
       - name: Commit and push
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git config --global user.name actions-user
+          git config --global user.email 'actions@github.com'
           git add .
           git commit -m "Done"
           git push
@@ -31,5 +31,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Verifying linting results
         run: |
-          ls
           cat app/api/routes.py
