@@ -22,11 +22,14 @@ jobs:
           python .github/workflows/linter.py
       - name: Commit and push
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add .
-          git commit -m "Done"
-          git push
+          git config --local user.name 'github-actions[bot]'
+          git config --local user.email 'github-actions[bot]@users.noreply.github.com'
+          if ! git diff --exit-code; then
+            git add .
+            git commit -m "Done"
+            git push
+          fi
+        
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Verifying linting results
